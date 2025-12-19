@@ -85,8 +85,8 @@ specific exclusion or inclusion criteria are respected, and finally 5
 columns specifying whether the report is flagged or not by each of the 5
 pregnancy algorithms here implemented (UMC, EMA, and the 3 Sakai with
 different intended performance). See the function documentation
-(?check_pregnancy_criteria) for details, and the article on the website
-(TO BE ADDEEEEEEEEEEEEEEEED) for more extensive use cases.
+(?check_pregnancy_criteria) for details, and the GitHub Page article for
+more extensive use cases.
 
 # Study Reference
 
