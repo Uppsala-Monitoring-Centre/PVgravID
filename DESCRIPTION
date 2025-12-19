@@ -1,0 +1,49 @@
+Package: PVgravID
+Title: Identifying Pregnancy Reports in Pharmacovigilance Databases
+Version: 1.0.0
+Authors@R: c(
+    person("Michele", "Fusaroli", , "michele.fusaroli@who-umc.org", role = c("aut", "cre")),
+    person("Levente", "Papai", , "levente.papai@who-umc.org", role = "aut"),
+    person("Valentina", "Giunchi", , "valentina.giunchi2@unibo.it", role = "aut"),
+    person("Sara", "Vidlin", , "sara.vidlin@who-umc.org", role = "aut"),
+    person("Lovisa", "Sandberg", , "lovisa.sandberg@who-umc.org", role = "aut"),
+    person("Nhung", "Trinh", , "nhung.trinh@farmasi.uio.no", role = "aut"),
+    person("Takamasa", "Sakai", , "tksakai@meijo-u.ac.jp", role = "aut"),
+    person("Loris", "Piccolo", , "loris.piccolo@ema.europa.eu", role = "aut"),
+    person("Cosimo", "Zaccaria", , "cosimo.zaccaria@ema.europa.eu", role = "aut"),
+    person("Elena", "Rocca", , "elenaroc@oslomet.no", role = "aut")
+  )
+Description: Implementation and comparison of algorithms for retrieval of
+    pregnancy reports from pharmacovigilance datasets.
+License: MIT + file LICENSE
+URL: https://uppsala-monitoring-centre.github.io/PVgravID/
+BugReports: https://github.com/Uppsala-Monitoring-Centre/PVgravID/issues
+Depends: 
+    data.table,
+    R (>= 3.5)
+Imports: 
+    ComplexUpset,
+    DiAna,
+    dplyr,
+    eulerr,
+    ggflowchart,
+    ggplot2,
+    gtsummary,
+    tibble,
+    tidyr,
+    writexl
+Suggests: 
+    lintr,
+    PVdagger,
+    rcmdcheck,
+    readxl,
+    testthat (>= 3.0.0)
+Remotes:
+    fusarolimichele/DiAna_package,
+    krassowski/complex-upset,
+    PVverse/pv_dagger
+Config/Needs/website: rmarkdown
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

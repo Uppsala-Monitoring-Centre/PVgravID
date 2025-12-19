@@ -1,0 +1,73 @@
+url: https://uppsala-monitoring-centre.github.io/PVgravID/
+template:
+  bootstrap: 5
+  bootswatch: cosmo
+
+home:
+  title: PVgravID - Identifying Pregnancy Reports in Pharmacovigilance Databases
+  description: >
+    Implementation and comparison of algorithms for retrieval of pregnancy
+    reports from pharmacovigilance datasets (VigiBase and FAERS).
+
+authors:
+  Michele Fusaroli:
+    href: https://github.com/fusarolimichele
+  Levente Papai:
+    href: https://github.com/lpapai
+  Valentina Giunchi:
+    href: https://github.com/ValeUMC
+  Sara Vidlin:
+    href: https://github.com/saravidlin-umc
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [github]
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      aria-label: "Home"
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Caveats and Considerations
+        href: articles/Caveats-and-Considerations.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      aria-label: "GitHub"
+      href: https://github.com/Uppsala-Monitoring-Centre/PVgravID
+
+reference:
+  - title: Main Functions
+    desc: Core functions for identifying pregnancy reports
+    contents:
+    - check_criteria
+    - generate_pregnancy_flags
+
+  - title: Visualization Functions
+    desc: Functions for creating plots and visualizations
+    contents:
+    - render_upset
+    - render_venn
+    - get_counts_for_upset
+    - flowchart_generator
+
+  - title: Descriptive Functions
+    desc: Descriptive Function for characterizing reports
+    contents:
+    - descriptive
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
+

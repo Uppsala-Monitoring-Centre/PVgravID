@@ -1,0 +1,42 @@
+---
+title: "Caveats and Considerations"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The applicability of pregnancy-identification algorithms depends on the **available variables** and the **structure** of your database.
+
+These algorithms are designed for different scopes and are **not universal**. Always evaluate whether the algorithm aligns with your specific research question and consider any necessary tailoring. For instance, if your study focuses on pregnancies in older individuals, you may need to **remove age-based exclusion criteria** present in some algorithms (e.g., UMC or EMA).
+
+If possible, after retrieving pregnancy-related reports, **review individual cases** to confirm correct flagging and check for **unusual patterns**.
+
+# Performance Limitations
+
+- Not all relevant reports may be captured, and some may be incorrectly flagged.
+- Performance varies across:
+  - **Databases** (due to structure and processing choices)
+  - **Subpopulations** (e.g., age groups)
+  - **Regions** (different reporting formats or recommendations)
+  - **Reporter types** (variation in reporting practices)
+  - **Medication classes** (e.g., vaccines vs. drugs)
+
+Any deviation from the **original algorithm** affects performance. If possible, assess whether reports flagged differently by **tailored vs. original** algorithms are appropriate for your analysis.
+
+Misclassification of **pregnancy-related variables** can hinder proper adjustment for biases associated with pregnancy. For further discussion, see: Fusaroli, M., Sartori, D., van Puijenbroek, E.P. _et al._ (2025). *Charting and Sidestepping the Pitfalls of Disproportionality Analysis.* *Drug Safety*.  
+  DOI: [10.1007/s40264-025-01604-y](https://doi.org/10.1007/s40264-025-01604-y)
+
+# Complexity of Linked Information
+
+Algorithms typically retrieve two populations: **mothers** and **prenatally exposed individuals**. Often, information about both is **co-present in the same report**, making separation challenging. For further discussion, see: Sandberg, L., Vidlin, S.H., K-Pápai, L. _et al._ (2025). *Uncovering Pregnancy Exposures in Pharmacovigilance Case Report Databases: A Comprehensive Evaluation of the VigiBase Pregnancy Algorithm*. *Drug Safety*, 48, 1103–1118.  
+  DOI: [10.1007/s40264-025-01559-0](https://doi.org/10.1007/s40264-025-01559-0)
+
+# Contact
+
+If you would like to give us **feedback** on the package, **share your work** to motivate further development of the package, or **consult us** on analyses using these algorithms, please contact us via UMC:  
+<https://who-umc.org/contact-information/help-and-support/>
+

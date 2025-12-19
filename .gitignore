@@ -8,6 +8,8 @@
 
 # User-specific files
 .Ruserdata
+*.ps1
+*.bat
 
 # Example code in package build process
 *-Ex.R
@@ -20,6 +22,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -39,11 +42,30 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
 
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+.Rproj.user
+.Rdata
+.DS_Store
+
+# ACT secrets
+.secrets
+.quarto
+
+# Notebooks
+notebooks
+scripts
+
+# Data
+data
+external_sources
+output
+*.xlsx
+
+# Confidential
+preprocessing_VB.R
+test_data

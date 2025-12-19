@@ -1,0 +1,41 @@
+# Get Counts for UpSet Plot
+
+This function calculates the counts of intersections for an UpSet plot.
+
+## Usage
+
+``` r
+get_counts_for_upset(subset, min_elements_in_intersection = 100)
+```
+
+## Arguments
+
+- subset:
+
+  A data frame containing the data to be used for the UpSet plot.
+
+- min_elements_in_intersection:
+
+  An integer specifying the minimum number of elements in an
+  intersection to be included. Default is 100.
+
+## Value
+
+A data frame with the counts of intersections and the concatenated
+primary IDs for each intersection.
+
+## Details
+
+The function groups the data by all columns except `primaryid`,
+calculates the count of primary IDs for each group, and concatenates the
+primary IDs into a single string. The resulting data frame is sorted in
+descending order of the counts.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Example usage
+get_counts_for_upset(subset, min_elements_in_intersection = 100)
+} # }
+```

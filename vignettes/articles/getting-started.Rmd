@@ -1,0 +1,265 @@
+---
+title: "Getting Started"
+---
+
+```{r, include = FALSE}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Study Reference
+
+This package was developed as part of the following study:
+
+> **Exploring and Comparing Existing Algorithms for Flagging Pregnancy-related Adverse Event Reports**\
+> *Sara Hedfors Vidlin, Valentina Giunchi, Levente K-Pápai, Lovisa Sandberg, Cosimo Zaccaria, Takamasa Sakai, Loris Piccolo, Elena Rocca, Michele Fusaroli, Nhung TH Trinh*
+
+# PVgravID: Identifying Pregnancy Reports in Pharmacovigilance Databases
+
+## Overview
+
+**PVgravID** is an R package for the identification and comparison of pregnancy-related reports in large pharmacovigilance databases, specifically VigiBase and FAERS. It implements and harmonizes three published rule-based algorithms for flagging pregnancy-related adverse event reports, enabling researchers to systematically retrieve, compare, and analyze such reports across different data sources.
+
+## Background
+
+Pregnant individuals are often excluded from clinical trials, making post-marketing surveillance crucial for understanding drug safety in this population. However, the lack of a standardized pregnancy indicator in adverse event reporting complicates the identification of relevant cases. Three rule-based algorithms have been developed to address this, each tailored to a specific database (FAERS, EudraVigilance, VigiBase) and with different scopes and rationales. PVgravID harmonizes and implements these algorithms, allowing direct comparison and application to both VigiBase and FAERS datasets.
+
+## Features
+
+-   Implements three published algorithms for identifying pregnancy-related reports:
+    1.  [Sakai T, Ohtsu F, Sekiya Y, et al (2016) Methodology for Estimating the Risk of Adverse Drug Reactions in Pregnant Women: Analysis of the Japanese Adverse Drug Event Report Database. Yakugaku Zasshi 136:499–505.](https://doi.org/10.1248/yakushi.15-00235)
+    2.  [Zaccaria C, Piccolo L, Gordillo-Marañón M, et al (2024) Identification of Pregnancy Adverse Drug Reactions in Pharmacovigilance Reporting Systems: A Novel Algorithm Developed in EudraVigilance. Drug Saf 47:1127–1136.](https://doi.org/10.1007/s40264-024-01448-y)
+    3.  [Sandberg L, Vidlin SH, K-Pápai L, et al (2025) Uncovering Pregnancy Exposures in Pharmacovigilance Case Report Databases: A Comprehensive Evaluation of the VigiBase Pregnancy Algorithm. Drug Saf.](https://doi.org/10.1007/s40264-025-01559-0)
+-   Harmonized logic for cross-database comparison
+-   Function to tailor the algorithms to the researcher specific need
+-   Functions for descriptive analysis and visualization (Venn diagrams, upset plots)
+-   Interoperable with the [DiAna](https://github.com/fusarolimichele/DiAnDiAna_packagea) R package for pharmacovigilance data
+
+## Installation
+
+PVgravID is not yet on CRAN. To install from source:
+
+``` r
+# install.packages("pak")
+pak::pak("Uppsala-Monitoring-Centre/PVgravID")
+```
+
+## Data
+
+This project used both VigiBase data (as available to the Uppsala Monitoring Centre) and FAERS data (as provided in a cleaned form by the DiAna package. To install it follow the instruction at the <https://github.com/fusarolimichele/DiAna_package> github.
+
+The following script will use the FAERS data, because of it ready availability to the public. The package expects input data in the format used by the DiAna package, with data tables for demographics, drugs, reactions, indications, outcomes, etc.
+
+## Usage
+
+We first import the library used and, following DiAna workflow, we define the last quarter of the FAERS we want to work with: "25Q1". Note that all the quarters previous to it will also be included. We then import all the demographic data up to 25Q1.
+
+```{r setup, message = FALSE, warning = FALSE}
+library(PVgravID)
+library(DiAna)
+library(dplyr)
+FAERS_version <- "25Q1"
+import("DEMO")
+```
+
+### Retrieve Pregnancy Reports
+
+The main function of the package is generate_pregnancy_flags, which takes a list of report identifiers (in our case all the reports included in Demo) and import them from the data folder included in the same project folder (as in the DiAna directory structure), and assess each report for the inclusion and exclusion criteria of the three different pregnancy algorithms.
+
+```{r generate_pregnancy_flags}
+matrix_flagged_for_pregnancy <- generate_pregnancy_flags(pids_vct = Demo$primaryid)
+```
+
+```{r show_pregnancy_flags}
+kable(head(matrix_flagged_for_pregnancy, 100), format = "html") |>
+  kable_styling(full_width = FALSE) |>
+  scroll_box(height = "400px")
+```
+
+As it can be observed, the outcome of the function is a matrix with: in the first column the primaryid, then 34 columns specifying whether specific exclusion or inclusion criteria are respected, and finally 5 columns specifying whether the report is flagged or not by each of the 5 pregnancy algorithms here implemented (UMC, EMA, and the 3 Sakai with different intended performance). See the function documentation (`?check_pregnancy_criteria`) for details.
+
+We can then extract the vectors of report id flagged by each algorithm (and count them) in the following way:
+
+```{r pregnancy_reports}
+UMC_pregnancy_reports <- matrix_flagged_for_pregnancy[UMC == TRUE]$primaryid
+length(UMC_pregnancy_reports)
+EMA_pregnancy_reports <- matrix_flagged_for_pregnancy[EMA == TRUE]$primaryid
+length(EMA_pregnancy_reports)
+SakaiHPPV_pregnancy_reports <- matrix_flagged_for_pregnancy[SakaiHPPV == TRUE]$primaryid
+length(SakaiHPPV_pregnancy_reports)
+```
+
+### Visualize Flowchart of Selection of Reports for a Specific Algorithm
+
+```{r flowchart}
+flowchart_generator(pregnancy_flags_table = matrix_flagged_for_pregnancy, algorithm = "UMC")
+```
+
+### Visualize Comparison Pregnancy Algorithms
+
+The overlap in the reports flagged by the different algorithms can be visualized as follows using an Euler-Venn diagram:
+
+```{r render_venn}
+render_venn(pids_sets = list(
+  "UMC" = UMC_pregnancy_reports,
+  "EMA" = EMA_pregnancy_reports,
+  "SakaiH" = SakaiHPPV_pregnancy_reports
+))
+```
+
+Here we can see that most of the reports flagged as pregnancy-related by at least one of the algorithms is flagged by the UMC algorithm. But still there are reports that only the other algorithm flags. Let's look at the criteria that resulted in some reports being flagged by the EMA algorithms but not the other two. And let's look at them using an upset plot.
+
+```{r render_upset, warning=FALSE}
+nrow(matrix_flagged_for_pregnancy[EMA == TRUE & UMC == FALSE & SakaiHPPV == FALSE])
+u_plot <- render_upset(
+  matrix_flagged_for_pregnancy[EMA == TRUE & UMC == FALSE & SakaiHPPV == FALSE],
+  min_elements_in_intersection = 1
+)
+u_plot
+```
+
+We see in this case that most of the reports are here because they respect the inclusion criterium of a term related to foetal events, abortion, or delivery among reactions (shared between the UMC and the EMA algorithm) but also include an exclusion criterium that make them ineligible for the UMC pregnancy flag (i.e., they report exclusively paternal exposure).
+
+What if we wanted to include only specific criteria? We can specify the inclusion and exclusion criteria in the following way, and run the function check_criteria. In this example we add two inclusion criteria to the UMC algorithm concerning intraamniotic and extraamniotic exposure.
+
+```{r tailored_selection}
+exclusions_UMC <- c("E_age_over_50y", "E_agegroup_elderly", "E_parent_M", "E_reac_paternal")
+inclusions_UMC <- c(
+  "I_gestation", "I_serious_CA", "I_reac_cong_below_2", "I_reac_normal", "I_reac_fet_abo_pregn",
+  "I_reac_exposure_matACunkA", "I_indi_fet_abo_pregn_norm", "I_indi_exposure_matACunkA", "I_route_transplacental",
+  "I_reac_neon_below_8days", "I_concurrent_pregn", "I_parent_F_nolac"
+)
+inclusions_tailored <- c(inclusions_UMC, "I_route_intramniotic", "I_route_extraamniotic")
+matrix_flagged_for_pregnancy[
+  , "UMC_tailored" := check_criteria(.SD, exclusions_UMC, inclusions_tailored),
+  .SDcols = c(exclusions_UMC, inclusions_tailored)
+]
+additional_flags <- matrix_flagged_for_pregnancy[UMC == FALSE & UMC_tailored == TRUE]
+nrow(additional_flags)
+```
+
+We see that we identify this way 62 additional reports, which have the following characteristics:
+
+```{r upset_tailored, warning = FALSE}
+render_upset(additional_flags |> select(-UMC_tailored), min_elements_in_intersection = 1)
+```
+
+We see this way that only 19 reports are included because of extra-amniotic exposure, and all the others are included because of intraamniotic exposure.
+
+# Additional Uses
+
+## Descriptive Analysis
+
+We can wonder what are the caracteristics of pregnancy reports, using the descriptive analysis from DiAna.
+
+```{r descriptive, warning = FALSE}
+import("THER")
+descr_table <- descriptive(matrix_flagged_for_pregnancy[UMC == TRUE]$primaryid)
+(descr_table)
+```
+
+We can also compare the reports flagged by the algorithm as pregnancy-related with the reference group made by a random sample of the reports in the database.
+
+```{r descriptive_comparison}
+descr_comp_table <- descriptive(matrix_flagged_for_pregnancy[UMC == TRUE]$primaryid,
+  RG = sample(Demo$primaryid, 10000)
+)
+(descr_comp_table)
+```
+
+## Disproportionality Analysis
+
+To showcase this use, we also use the PVdagger package to draw the DAGs, documented in the following website: <https://pvverse.github.io/pv_dagger/>.
+
+```{r additional_packages}
+# run only once. pak::pak("PVverse/pv_dagger")
+library(PVdagger)
+```
+
+We should remember that pregnancy often acts as a confounder, modifying the chance of both being exposed to the drug and manifesting the event. This can introduce a distortion in disproportionality analysis.
+
+Two common scenarios can be represented in this way:
+
+-   Pregnancy is a positive confounder, increasing the chance of both the drug and event. In this situation, we can see a disproportionality in the lack of a reaction.
+
+-   Pregnancy is a negative confounder, for example because the drug is partly controindicated in pregnancy (e.g., because of lack of evidence of safety) and the event is instead more common in pregnancy. In this situation, we can miss a disproportionality in the presence of a reaction.
+
+Here two examples, represented using directed acyclic graphs (DAGs).
+
+```{r representing_confounders}
+create_dag("antiD_ig", "nausea",
+  label_inquiry = "",
+  confounder_path = list(
+    nodes = list("Pregnancy"), signs = list("+", "+"),
+    label = "Confounding by Pregnancy (+)"
+  )
+)
+
+create_dag("nivolumab", "premature_delivery",
+  label_inquiry = "",
+  confounder_path = list(
+    nodes = list("Pregnancy"), signs = list("-", "+"),
+    label = "Confounding by Pregnancy (-)"
+  )
+)
+```
+
+In these situations we need to condition on the variable that is introducing a confounder. In other words, we can restrict to pregnancy reports, and this is where our algorithms can become extremely useful. We can use them to select the background in the disproportionality_analysis function from DiAna as described below.
+
+```{r antiD}
+restrictions <- list(
+  "Crude" = Demo$primaryid,
+  "Pregnancy" = matrix_flagged_for_pregnancy[UMC == TRUE]$primaryid
+)
+
+
+drug <- "anti-d immunoglobulin"
+event <- "nausea"
+
+disproportionality_df <- data.table()
+for (n in seq_along(restrictions)) {
+  t <- restrictions[n]
+  t_name <- names(t)
+  t_pids <- unlist(t)
+  df <- disproportionality_analysis(
+    drug_selected = unlist(drug),
+    reac_selected = unlist(event),
+    temp_drug = Drug[role_cod %in% c("PS", "SS", "I")],
+    restriction = t_pids
+  )[, nested := t_name]
+  disproportionality_df <- rbindlist(list(disproportionality_df, df), fill = TRUE)
+}
+disproportionality_df <- disproportionality_df[, expected := (D * E / (D_E + D_nE + nD_E + nD_nE))]
+
+render_forest_table(disproportionality_df)
+```
+
+We see in this case that the positively confounded disproportionality disappears when restricting to pregnancy reports.
+
+```{r nivolumab}
+drug <- "nivolumab"
+event <- list("preterm birth" = list("premature baby", "premature delivery"))
+
+disproportionality_df <- data.table()
+for (n in seq_along(restrictions)) {
+  t <- restrictions[n]
+  t_name <- names(t)
+  t_pids <- unlist(t)
+  df <- disproportionality_analysis(
+    drug_selected = unlist(drug),
+    reac_selected = unlist(event),
+    temp_drug = Drug[role_cod %in% c("PS", "SS", "I")],
+    restriction = t_pids
+  )[, nested := t_name]
+  disproportionality_df <- rbindlist(list(disproportionality_df, df), fill = TRUE)
+}
+disproportionality_df <- disproportionality_df[, expected := (D * E / (D_E + D_nE + nD_E + nD_nE))]
+
+render_forest_table(disproportionality_df)
+```
+
+We see in this case that the negatively confounded disproportionality appears when restricting to pregnancy reports.
