@@ -20,8 +20,8 @@ The package depends on several R packages. The main dependency is [DiAna](https:
 
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR-USERNAME/pv_mater.git
-cd pv_mater
+git clone https://github.com/Uppsala-Monitoring-Centre/PVgravID.git
+cd PVgravID
 ```
 
 ### 2. Install Development Dependencies
@@ -227,7 +227,7 @@ devtools::document()
 ## Project Structure
 
 ```text
-pv_mater/
+PVgravID/
 ├── R/                          # R source code
 │   ├── check_pregnancy_criteria.R
 │   ├── flowchart_generator.R
