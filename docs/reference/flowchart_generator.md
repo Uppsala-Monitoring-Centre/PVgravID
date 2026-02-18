@@ -20,7 +20,7 @@ flowchart_generator(database = FAERS_version, pregnancy_flags_table, algorithm)
 - pregnancy_flags_table:
 
   A data frame returned by
-  [`generate_pregnancy_flags()`](https://pvverse.github.io/pv_mater/reference/generate_pregnancy_flags.md).
+  [`generate_pregnancy_flags()`](https://uppsala-monitoring-centre.github.io/PVgravID/reference/generate_pregnancy_flags.md).
 
 - algorithm:
 
