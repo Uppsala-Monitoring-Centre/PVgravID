@@ -66,7 +66,7 @@ PVgravID is not yet on CRAN. To install from source:
 ``` r
 
 # install.packages("pak")
-pak::pak("PVverse/pv_mater")
+pak::pak("Uppsala-Monitoring-Centre/PVgravID")
 ```
 
 ### Data
