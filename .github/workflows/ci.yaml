@@ -13,6 +13,20 @@ name: ci
 permissions: read-all
 
 jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Lint commits
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: .commitlintrc.json
+          lintMergeCommits: true
+
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
     name: Check ${{ matrix.config.os }} (${{ matrix.config.r }})
