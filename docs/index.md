@@ -29,7 +29,7 @@ You can install the development version of PVgravID from
 ``` r
 
 # install.packages("pak")
-pak::pak("PVverse/pv_mater")
+pak::pak("Uppsala-Monitoring-Centre/PVgravID")
 ```
 
 ## Data

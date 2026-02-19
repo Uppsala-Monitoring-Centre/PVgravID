@@ -20,7 +20,7 @@
 ">
 <meta property="og:description" content="Implementation and comparison of algorithms for retrieval of pregnancy reports from pharmacovigilance datasets (VigiBase and FAERS).
 ">
-<meta property="og:image" content="https://pvverse.github.io/pv_mater/logo.png">
+<meta property="og:image" content="https://uppsala-monitoring-centre.github.io/PVgravID/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -51,7 +51,7 @@
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/PVverse/pv_mater" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/Uppsala-Monitoring-Centre/PVgravID" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -80,7 +80,7 @@
 <p>You can install the development version of PVgravID from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"PVverse/pv_mater"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"Uppsala-Monitoring-Centre/PVgravID"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
@@ -93,7 +93,7 @@
 </h2>
 <p>We first import the library used and, following DiAna workflow, we define the dataset we want to work with: “sample”, a sample of the FAERS included in the DiAna package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pvverse.github.io/pv_mater">PVgravID</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://uppsala-monitoring-centre.github.io/PVgravID/">PVgravID</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fusarolimichele.github.io/DiAna_package/" class="external-link">DiAna</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">FAERS_version</span> <span class="op">&lt;-</span> <span class="st">"sample"</span></span></code></pre></div>
@@ -122,8 +122,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/PVverse/pv_mater/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/PVverse/pv_mater/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -172,8 +172,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check status badge"></a></li>
-<li><a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/ci.yaml" class="external-link"><img src="https://github.com/Uppsala-Monitoring-Centre/PVgravID/actions/workflows/ci.yaml/badge.svg" alt="CI status badge"></a></li>
 </ul>
 </div>
 

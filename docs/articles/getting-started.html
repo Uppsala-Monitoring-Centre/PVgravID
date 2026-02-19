@@ -46,7 +46,7 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/PVverse/pv_mater" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/Uppsala-Monitoring-Centre/PVgravID" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -64,7 +64,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Getting Started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/PVverse/pv_mater/blob/HEAD/vignettes/articles/getting-started.Rmd" class="external-link"><code>vignettes/articles/getting-started.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Uppsala-Monitoring-Centre/PVgravID/blob/HEAD/vignettes/articles/getting-started.Rmd" class="external-link"><code>vignettes/articles/getting-started.Rmd</code></a></small>
       <div class="d-none name"><code>getting-started.Rmd</code></div>
     </div>
 
@@ -144,7 +144,7 @@ package for pharmacovigilance data</li>
 <p>PVgravID is not yet on CRAN. To install from source:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"PVverse/pv_mater"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"Uppsala-Monitoring-Centre/PVgravID"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
@@ -166,7 +166,7 @@ define the last quarter of the FAERS we want to work with: “25Q1”. Note
 that all the quarters previous to it will also be included. We then
 import all the demographic data up to 25Q1.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pvverse.github.io/pv_mater">PVgravID</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://uppsala-monitoring-centre.github.io/PVgravID/">PVgravID</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fusarolimichele.github.io/DiAna_package/" class="external-link">DiAna</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">FAERS_version</span> <span class="op">&lt;-</span> <span class="st">"25Q1"</span></span>
@@ -12592,7 +12592,7 @@ Algorithm<a class="anchor" aria-label="anchor" href="#visualize-flowchart-of-sel
 </h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/flowchart_generator.html">flowchart_generator</a></span><span class="op">(</span>pregnancy_flags_table <span class="op">=</span> <span class="va">matrix_flagged_for_pregnancy</span>, algorithm <span class="op">=</span> <span class="st">"UMC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/flowchart-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/flowchart-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="visualize-comparison-pregnancy-algorithms">Visualize Comparison Pregnancy Algorithms<a class="anchor" aria-label="anchor" href="#visualize-comparison-pregnancy-algorithms"></a>
@@ -12605,7 +12605,7 @@ visualized as follows using an Euler-Venn diagram:</p>
 <span>  <span class="st">"EMA"</span> <span class="op">=</span> <span class="va">EMA_pregnancy_reports</span>,</span>
 <span>  <span class="st">"SakaiH"</span> <span class="op">=</span> <span class="va">SakaiHPPV_pregnancy_reports</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/render_venn-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/render_venn-1.png" class="r-plt" alt="" width="700"></p>
 <p>Here we can see that most of the reports flagged as pregnancy-related
 by at least one of the algorithms is flagged by the UMC algorithm. But
 still there are reports that only the other algorithm flags. Let’s look
@@ -12620,7 +12620,7 @@ plot.</p>
 <span>  min_elements_in_intersection <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">u_plot</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/render_upset-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/render_upset-1.png" class="r-plt" alt="" width="700"></p>
 <p>We see in this case that most of the reports are here because they
 respect the inclusion criterium of a term related to foetal events,
 abortion, or delivery among reactions (shared between the UMC and the
@@ -12651,7 +12651,7 @@ exposure.</p>
 the following characteristics:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/render_upset.html">render_upset</a></span><span class="op">(</span><span class="va">additional_flags</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">UMC_tailored</span><span class="op">)</span>, min_elements_in_intersection <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/upset_tailored-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/upset_tailored-1.png" class="r-plt" alt="" width="700"></p>
 <p>We see this way that only 19 reports are included because of
 extra-amniotic exposure, and all the others are included because of
 intraamniotic exposure.</p>
@@ -12797,7 +12797,7 @@ disproportionality_analysis function from DiAna as described below.</p>
 <span><span class="va">drug</span> <span class="op">&lt;-</span> <span class="st">"anti-d immunoglobulin"</span></span>
 <span><span class="va">event</span> <span class="op">&lt;-</span> <span class="st">"nausea"</span></span>
 <span></span>
-<span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">restrictions</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">t</span> <span class="op">&lt;-</span> <span class="va">restrictions</span><span class="op">[</span><span class="va">n</span><span class="op">]</span></span>
 <span>  <span class="va">t_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
@@ -12808,19 +12808,19 @@ disproportionality_analysis function from DiAna as described below.</p>
 <span>    temp_drug <span class="op">=</span> <span class="va">Drug</span><span class="op">[</span><span class="va">role_cod</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PS"</span>, <span class="st">"SS"</span>, <span class="st">"I"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>    restriction <span class="op">=</span> <span class="va">t_pids</span></span>
 <span>  <span class="op">)</span><span class="op">[</span>, <span class="va">nested</span> <span class="op">:=</span> <span class="va">t_name</span><span class="op">]</span></span>
-<span>  <span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">disproportionality_df</span>, <span class="va">df</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">disproportionality_df</span>, <span class="va">df</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="va">disproportionality_df</span><span class="op">[</span>, <span class="va">expected</span> <span class="op">:=</span> <span class="op">(</span><span class="va">D</span> <span class="op">*</span> <span class="va">E</span> <span class="op">/</span> <span class="op">(</span><span class="va">D_E</span> <span class="op">+</span> <span class="va">D_nE</span> <span class="op">+</span> <span class="va">nD_E</span> <span class="op">+</span> <span class="va">nD_nE</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://fusarolimichele.github.io/DiAna_package/reference/render_forest_table.html" class="external-link">render_forest_table</a></span><span class="op">(</span><span class="va">disproportionality_df</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/antiD-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/antiD-1.png" class="r-plt" alt="" width="700"></p>
 <p>We see in this case that the positively confounded disproportionality
 disappears when restricting to pregnancy reports.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">drug</span> <span class="op">&lt;-</span> <span class="st">"nivolumab"</span></span>
 <span><span class="va">event</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"preterm birth"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"premature baby"</span>, <span class="st">"premature delivery"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">restrictions</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">t</span> <span class="op">&lt;-</span> <span class="va">restrictions</span><span class="op">[</span><span class="va">n</span><span class="op">]</span></span>
 <span>  <span class="va">t_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
@@ -12831,12 +12831,12 @@ disappears when restricting to pregnancy reports.</p>
 <span>    temp_drug <span class="op">=</span> <span class="va">Drug</span><span class="op">[</span><span class="va">role_cod</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PS"</span>, <span class="st">"SS"</span>, <span class="st">"I"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>    restriction <span class="op">=</span> <span class="va">t_pids</span></span>
 <span>  <span class="op">)</span><span class="op">[</span>, <span class="va">nested</span> <span class="op">:=</span> <span class="va">t_name</span><span class="op">]</span></span>
-<span>  <span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">disproportionality_df</span>, <span class="va">df</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">disproportionality_df</span>, <span class="va">df</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">disproportionality_df</span> <span class="op">&lt;-</span> <span class="va">disproportionality_df</span><span class="op">[</span>, <span class="va">expected</span> <span class="op">:=</span> <span class="op">(</span><span class="va">D</span> <span class="op">*</span> <span class="va">E</span> <span class="op">/</span> <span class="op">(</span><span class="va">D_E</span> <span class="op">+</span> <span class="va">D_nE</span> <span class="op">+</span> <span class="va">nD_E</span> <span class="op">+</span> <span class="va">nD_nE</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://fusarolimichele.github.io/DiAna_package/reference/render_forest_table.html" class="external-link">render_forest_table</a></span><span class="op">(</span><span class="va">disproportionality_df</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/nivolumab-1.png" class="r-plt" width="700"></p>
+<p><img src="getting-started_files/figure-html/nivolumab-1.png" class="r-plt" alt="" width="700"></p>
 <p>We see in this case that the negatively confounded disproportionality
 appears when restricting to pregnancy reports.</p>
 </div>
